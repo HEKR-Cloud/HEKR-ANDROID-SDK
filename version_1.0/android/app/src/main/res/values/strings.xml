@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HEKR</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_about_ours">AboutOursActivity</string>
+    <string name="title_activity_use_help">UseHelpActivity</string>
+    <string name="title_activity_add_device">AddDeviceActivity</string>
+    <string name="title_activity_list_device">ListDeviceActivity</string>
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开后刷新</string>
+    <string name="pull_to_refresh_refreshing_label">刷新\u2026</string>
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    <string name="about_activity_us">About</string>
+    <string name="help_activity_tucao">Advice</string>
+    <string name="tuichu_activity_tuichu">Exit</string>
+    <string name="about_activity_title">About Us</string>
+    <string name="help_activity_title">Advice</string>
+    <string name="help_activity_content_title">Your advance makes HEKR go further</string>
+    <string name="help_activity_hint">please feel free to say anything</string>
+    <string name="add_activity_content_title">SmartMatrix</string>
+    <string name="add_activity_content_threestep">Three steps to go</string>
+    <string name="add_activity_prompt_chooserouter">Please choice the route</string>
+    <string name="add_activity_prompt_innnerpassword">password</string>
+
+    <!-- main -->
+    <string name="checked_have_wifi">network Status:Wi-Fi</string>
+    <string name="checked_have_network">Detection of cable network</string>
+    <string name="network_three_g">Network Status: 3G network</string>
+    <string name="checked_network_disconnect">No NetWork Available</string>
+    <string name="get_user_message">Getting the user information, please wait!</string>
+    <string name="add_device_please_connect_wifi">TO Add device, please connect Wi-Fi!</string>
+    <string name="please_connect_wifi">Please connect to the Wi-Fi!</string>
+
+    <!-- list -->
+    <string name="loading_device">Loading device</string>
+    <string name="open">ON</string>
+    <string name="close">OFF</string>
+    <string name="offline">N/A</string>
+    <string name="online">Online</string>
+
+    <!-- rename -->
+    <string name="device_oldname">Device Name:</string>
+    <string name="hint_device_newname">Please enter a new name</string>
+    <string name="toast_newname_notnull">The new name cannot be empty</string>
+
+    <!-- hekrconfig -->
+    <string name="hekr_config">device config</string>
+    <string name="hekr_config_wifipass">input wifi password</string>
+    <string name="hekr_config_notconnect">soft ap connect</string>
+
+    <!-- add -->
+    <string name="please_choose_wifi">Please select Wi-Fi!</string>
+    <string name="choose_router">Choose router</string>
+    <string name="cannot_find_wifivote">Wi-Fi hotSpot Can not be found, please click after rescanning</string>
+    <string name="bound_router_failed">Failed to bind the routing information</string>
+    <string name="bound_router_network_error">Bind the routing information, network error</string>
+    <string name="bound_user_message_error">Failed to bind user information</string>
+    <string name="bound_user_message_network_error">Bind the user information, network error</string>
+    <string name="wifi_vote_error_network_error">Wi-Fi hotSpot error, network error</string>
+    <string name="please_connect_network_then_adddevice">Please connect to the Internet, and then add the device</string>
+    <string name="please_choose_message">Please select Wi-Fi, and enter the password！</string>
+    <string name="adding_device">Adding device</string>
+    <string name="please_connect_device_vote">Please connect the device hotSpot!</string>
+    <string name="now_connectting_vote">current device:</string>
+    <string name="show_router_password">Show password</string>
+    <string name="AlertDialog_message">You choose the WiFi or password to be empty, confirm continue to add?</string>
+    <string name="AlertDialog_title">Prompt</string>
+    <string name="AlertDialog_positiveButton">confirm</string>
+    <string name="AlertDialog_negativeButton">cancel</string>
+
+    <!-- login -->
+    <string name="press_again_exit">Press Enter again to exit</string>
+
+    <!-- loginweb -->
+    <string name="login_loadding">Loading...</string>
+
+    <!-- tucao -->
+    <string name="sending_oba">Sending...</string>
+    <string name="oba_already_bb_success">sent successfully!</string>
+    <string name="tucao_empty">your advice is empty</string>
+    <string name="check_network">Please check the network</string>
+
+    <!-- updateapp -->
+    <string name="have_new_software_download_go">you have the latest software package, want to download it?</string>
+    <string name="software_update">Software update</string>
+    <string name="download">Download</string>
+    <string name="see_you_later">Later</string>
+    <string name="software_version_update">Software version update</string>
+    <string name="update_cancel">Cancel</string>
+    <string name="title_activity_set">SetActivity</string>
+
+</resources>

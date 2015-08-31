@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.hekr.android.app.RenameDeviceActivity"
+                android:background="@drawable/beijing"
+                android:gravity="center_horizontal">
+
+    <RelativeLayout
+            android:id="@+id/stylebar"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="#00000000"
+            >
+        <com.hekr.android.app.ui.IconView
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="7dp"
+                android:clickable="true"
+                android:onClick="navBack"
+                android:padding="10dp"
+                android:textSize="20dp"
+                android:textColor="#ffffffff"
+                android:text="&#xf060;" />
+        <TextView
+                android:id="@+id/devicetype"
+                android:textColor="#ffffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="20dp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:id="@+id/relative"
+            android:layout_below="@+id/stylebar"
+            android:weightSum="1"
+            >
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:layout_height="fill_parent"
+                android:id="@+id/leftrelative">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/leftrelative"
+                android:layout_toLeftOf="@+id/rightrelative"
+                android:id="@+id/middlerelative">
+
+
+            <TextView
+                    android:id="@+id/devicename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="#ffffffff"
+                    android:textSize="20dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_alignParentTop="true">
+
+            </TextView>
+            <EditText
+                    android:id="@+id/devicetid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_below="@+id/devicename"
+                    android:textSize="15dp"
+                    android:maxLength="15"
+                    android:hint="@string/hint_device_newname"
+                    android:textColorHint="#ffffffff"
+                    android:cursorVisible="true"
+                    android:textColor="#ffffffff"
+                    android:background="@drawable/rounded_editview"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    />
+            <ImageButton
+                    android:id="@+id/updatename"
+                    android:layout_width="fill_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/image_btn_press"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/devicetid"
+                    />
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/rightrelative"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                >
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

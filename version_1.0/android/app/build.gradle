@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+    }
+}
+//声明是Android程序
+apply plugin: 'com.android.application'
+
+repositories {
+    jcenter()
+    maven {
+        url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2'
+    }
+}
+
+android {
+    //编译SDK的版本
+    compileSdkVersion 21
+    //build tools的版本
+    buildToolsVersion '20.0.0'
+
+    defaultConfig {
+        //应用的包名
+        applicationId "com.hekr.android.app"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.2.5"
+    }
+
+    //java版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+    buildTypes {
+        release {
+            // 是否进行混淆
+            minifyEnabled false
+            // 混淆文件的位置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    productFlavors {
+            AndroidMarket {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "AndroidMarket"]
+                ndk {
+                    abiFilters "armeabi-v7a", ""
+                }
+            }
+    }
+    // 移除lint检查的error
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    // 编译libs目录下的所有jar包
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'org.xwalk:xwalk_core_library:12.41.296.9'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+}

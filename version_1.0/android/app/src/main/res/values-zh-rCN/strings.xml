@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HEKR</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_about_ours">AboutOursActivity</string>
+    <string name="title_activity_use_help">UseHelpActivity</string>
+    <string name="title_activity_add_device">AddDeviceActivity</string>
+    <string name="title_activity_list_device">ListDeviceActivity</string>
+
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开后刷新</string>
+    <string name="pull_to_refresh_refreshing_label">刷新\u2026</string>
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+
+    <string name="about_activity_us">关于</string>
+    <string name="help_activity_tucao">吐槽</string>
+    <string name="tuichu_activity_tuichu">退出</string>
+
+    <string name="about_activity_title">关于我们</string>
+    <string name="help_activity_title">吐槽</string>
+    <string name="help_activity_content_title">HEKR的每一个进步，离不开您的吐槽</string>
+    <string name="help_activity_hint">亲，专心吐，使劲吐!</string>
+    
+    <string name="add_activity_content_title">为设备注入智慧</string>
+    <string name="add_activity_content_threestep">还需要以下三步</string>
+    <string name="add_activity_prompt_chooserouter">请选择家中路由</string>
+    <string name="add_activity_prompt_innnerpassword">输入密码</string>
+
+    <!--main-->
+    <string name="checked_have_wifi">网络状态：Wi-Fi</string>
+    <string name="checked_have_network">检测到有有线网络</string>
+    <string name="network_three_g">网络状态：3G网络</string>
+    <string name="checked_network_disconnect">网络状态：网络断开</string>
+
+    <string name="get_user_message">正在获取用户信息,请您稍等并检查网络!</string>
+    <string name="add_device_please_connect_wifi">添加设备，请先连接Wi-Fi!</string>
+    <string name="please_connect_wifi">请连接Wi-Fi!</string>
+
+    <!--list-->
+    <string name="loading_device">正在载入设备...</string>
+    <string name="open">已开</string>
+    <string name="close">已关</string>
+    <string name="offline">离线</string>
+    <string name="online">在线</string>
+
+    <!--rename-->
+    <string name="device_oldname">设备名称：</string>
+    <string name="hint_device_newname">请输入新名称</string>
+    <string name="toast_newname_notnull">新名称不能为空</string>
+
+
+    <!--hekrconfig-->
+    <string name="hekr_config">请确认设备进入一键配置模式</string>
+    <string name="hekr_config_wifipass">请输入路由器密码</string>
+    <string name="hekr_config_notconnect">Wi-Fi 直连配置</string>
+
+
+    <!--add-->
+    <string name="please_choose_wifi">请选择wifi!</string>
+    <string name="choose_router">选择路由</string>
+    <string name="cannot_find_wifivote">找不到Wi-Fi热点，请点击后重新扫描</string>
+    <string name="bound_router_failed">绑定路由信息失败</string>
+    <string name="bound_router_network_error">绑定路由信息时，网络异常</string>
+    <string name="bound_user_message_error">绑定用户信息失败</string>
+    <string name="bound_user_message_network_error">绑定用户信息时，网络异常</string>
+    <string name="wifi_vote_error_network_error">Wi-Fi热点出错，网络异常</string>
+    <string name="please_connect_network_then_adddevice">请连接互联网，再添加设备</string>
+    <string name="please_choose_message">请选择Wi-Fi,并输入密码!</string>
+    <string name="adding_device">正在添加设备</string>
+    <string name="please_connect_device_vote">请连接设备的热点!</string>
+    <string name="now_connectting_vote">当前连接的设备：</string>
+    <string name="show_router_password">显示密码</string>
+    <string name="AlertDialog_message">您选择的wifi或者密码为空，确认继续添加吗?</string>
+    <string name="AlertDialog_title">提示</string>
+    <string name="AlertDialog_positiveButton">确认</string>
+    <string name="AlertDialog_negativeButton">取消</string>
+
+    <!--rename-->
+    <string name="input_name_empty_tip">新名称不能为空</string>
+    <string name="change_name_success_tip">改名成功</string>
+    <string name="change_name_error_tip">改名失败</string>
+
+
+    <!--login-->
+    <string name="press_again_exit">再按一次返回键退出</string>
+
+    <!--loginweb-->
+    <string name="login_loadding">载入中...</string>
+
+    <!--tucao-->
+    <string name="sending_oba">正在发送中，亲！</string>
+    <string name="oba_already_bb_success">亲，您已吐槽成功！</string>
+    <string name="tucao_empty">亲，您的吐槽内容为空！</string>
+    <string name="check_network">请您检查网络！</string>
+
+    <!--updateapp-->
+    <string name="have_new_software_download_go">有最新的软件包哦，亲快下载吧~</string>
+    <string name="software_update">软件版本更新</string>
+    <string name="download">下载</string>
+    <string name="see_you_later">以后再说</string>
+    <string name="software_version_update">软件版本更新</string>
+    <string name="update_cancel">取消</string>
+
+</resources>
