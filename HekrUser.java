@@ -15,8 +15,8 @@ import java.util.Random;
 public class HekrUser {
     private Random r = new Random();
     private String ucookie;
-    //private String _csrftoken_ = "_csrftoken_=abcd";
-    private String _csrftoken_ = getRandomString(4);
+    private String _csrftoken_ = "_csrftoken_=abcd";
+    //private String _csrftoken_ = getRandomString(4);
     private String cookie;
     public  String httphostcn = "http://user.hekr.me";
     public  String httphost = null;
