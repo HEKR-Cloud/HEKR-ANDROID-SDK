@@ -131,8 +131,7 @@ public class HekrConfig {
 							done.set(true);
 						}
 					} catch (IOException e) {
-						try {
-							// 这个80毫秒没有卵用
+						try {						
 							dp = UDPConfig.setAccessKey("255.255.255.255", ak, null, 80);
 							String str = new String(dp.getData());
 							if (str.startsWith("(deviceACK ")) {
@@ -204,12 +203,4 @@ public class HekrConfig {
 			return false;
 		}
 	}
-
-//	public static void main(String[] args) throws Exception {
-//		String ak = "azAxMWZzQmo3bHNlRytvUklYWTZsNVFKV09GeGdud29ZN1lKaXZ4bitOUnhIWDJDK0JYRHdrME5qbUQ1SGJ2aitr";
-//		HekrConfigTest hc = new HekrConfigTest(ak);
-//		long begin = System.currentTimeMillis();
-//		hc.config("HEKR-C", "56781234");
-//		System.out.println((System.currentTimeMillis() - begin) / 1000);
-//	}
 }
