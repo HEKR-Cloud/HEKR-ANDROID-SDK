@@ -16,7 +16,6 @@ public class HekrUser {
     private Random r = new Random();
     private String ucookie;
     private String _csrftoken_ = "_csrftoken_=abcd";
-    //private String _csrftoken_ = getRandomString(4);
     private String cookie;
     public  String httphostcn = "http://user.hekr.me";
     public  String httphost = null;
@@ -68,8 +67,7 @@ public class HekrUser {
     }
 
 
-    public List list(){
-        Map m = null;
+    public List list(){       
         String respstr = HttpUtil.doGet( httphost+"/device/list.json?" + _csrftoken_, cookie);
         if(respstr != null) {
             JSONArray j = JSON.parseArray(respstr);
@@ -80,7 +78,6 @@ public class HekrUser {
     }
 
     public void list(HekrCallBackHandle callback){
-        Map m = null;
         String respstr = HttpUtil.doGet( httphost+"/device/list.json?" + _csrftoken_, cookie);
         if(respstr != null) {
             JSONArray j = JSON.parseArray(respstr);
@@ -179,16 +176,5 @@ public class HekrUser {
             Log.d("MyLog","调用删除异常");
             return false;
         }
-    }
-    private static String getRandomString(int length) { //length表示生成字符串的长度
-        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < length; i++) {
-            int number = random.nextInt(base.length());
-            sb.append(base.charAt(number));
-        }
-        return sb.toString();
-    }
-
+    }  
 }
