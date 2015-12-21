@@ -96,7 +96,7 @@ public class UDPConfig {
 		ds.send(dp);
 		ds.close();
 
-		byte[] data = (ssid + '\0' + password + '\0').getBytes();
+		byte[] data = (ssid + '\0' + password + '\0').getBytes("utf-8");
 
 		for (int i = 0; i < data.length; i++) {
 			ds = new DatagramSocket();
