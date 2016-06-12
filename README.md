@@ -1,5 +1,5 @@
 # HEKR-ANDROID-SDK
 
-氦氪HEKR安卓 SDK
+HEKR安卓 SDK
 
 
