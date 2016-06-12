@@ -1,5 +1,4 @@
 # HEKR-ANDROID-SDK
 
-HEKR安卓 SDK
 
 
