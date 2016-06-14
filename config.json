@@ -1,0 +1,46 @@
+{
+    "Hekr":{
+        "AppId":"xxxx",
+        "AppKey":"xxxx",
+        "AppSecurit":"xxxx"
+    },
+    "Social":{
+        "Weibo":{
+            "AppId":"xxxx",
+            "AppKey":"xxxx",
+            "AppSecurit":"xxxx"
+        },
+        "QQ":{
+            "AppId":"xxxx",
+            "AppKey":"xxxx",
+            "AppSecurit":""
+        },
+        "Weixin":{
+            "AppId":"xxxx",
+            "AppKey":"",
+            "AppSecurit":"xxxx"
+        },
+        "Facebook":{
+            "AppId":"xxxx",
+            "AppKey":"",
+            "AppSecurit":"xxxx"
+        },
+        "Google":{
+            "AppId":"xxxx",
+            "AppKey":"",
+            "AppSecurit":""
+        },
+        "Twitter":{
+            "AppId":"",
+            "AppKey":"xxxx",
+            "AppSecurit":"xxxx"
+        }
+    },
+    "push":{
+        "AppId":"xxxx",
+        "AppKey":"xxxx",
+        "AppSecurit":"xxxx"
+    }
+}
+
+
