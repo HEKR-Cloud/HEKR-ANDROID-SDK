@@ -33,6 +33,7 @@ open_sdk_r5509.jar
 
 * 在项目res目录下创建raw目录,将下载包中的config.json、webviewjavascriptbridge.js复制进去，config.json为项目的配置文件和第三方登录配置文件（填写各大平台申请的参数），webviewjavascriptbridge.js为控制页面桥接js。
 * 如果需要第三方微信登录,则必须将下载包中的wxapi文件夹复制项目包名目录（微信开放平台填写的包名）下！【具体参考[微信开放平台文档][11]】
+ 
 ###1.1、设置AndroidManifest.xml声明使用权限和服务
 ```
 <!-- 这个权限用于进行网络定位-->
