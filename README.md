@@ -15,7 +15,6 @@ http://www.androidchina.net/2467.html
 ##一、配置
 * 说明：本SDK中已使用以下依赖，请勿重复配置！
 ```
-android-support-v4.jar
 android-async-http-1.4.9.jar
 annotations-java5-15.0.jar
 eventbus-3.0.0.jar
