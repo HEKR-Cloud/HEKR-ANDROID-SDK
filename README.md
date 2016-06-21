@@ -5,18 +5,16 @@
 
 ###1、下载SDK
 * 下载[HEKR 3.0 SDK][3] 并解压缩。
-
 ###2、导入SDK
 * 将下载包中的hekrSDK.aar导入到本地工程中
 导入方法：
-
 https://developer.android.com/studio/projects/android-library.html
-
 http://www.androidchina.net/2467.html
 
 ##一、配置
-说明：本SDK中已使用以下依赖，请勿重复配置！
+* 说明：本SDK中已使用以下依赖，请勿重复配置！
 ```
+android-support-v4.jar
 android-async-http-1.4.9.jar
 annotations-java5-15.0.jar
 eventbus-3.0.0.jar
@@ -26,9 +24,15 @@ jmdns-3.2.2.jar
 lite-common-1.1.3.jar
 websocket.jar
 zxing.jar
+//第三方登录 qq/wechat/weibo
+libammsdk.jar
+mta-sdk-1.6.2.jar
+weiboSDKCore_3.1.2.jar
+open_sdk_r5509.jar
 ```
 
-### 在项目res目录下创建raw目录,将下载包中的config.json、webviewjavascriptbridge.js复制进去，config.json为项目的配置文件，webviewjavascriptbridge.js为控制页面桥接js。
+* 在项目res目录下创建raw目录,将下载包中的config.json、webviewjavascriptbridge.js复制进去，config.json为项目的配置文件和第三方登录配置文件（填写各大平台申请的参数），webviewjavascriptbridge.js为控制页面桥接js。
+* 如果需要第三方微信登录,则必须将下载包中的wxapi文件夹复制项目包名目录（微信开放平台填写的包名）下！【具体参考[微信开放平台文档][11]】
 ###1.1、设置AndroidManifest.xml声明使用权限和服务
 ```
 <!-- 这个权限用于进行网络定位-->
@@ -56,6 +60,46 @@ zxing.jar
 <service android:name="me.hekr.hekrsdk.service.WebSocketService" />
 <!-- 局域网发现服务-->
 <service android:name="me.hekr.hekrsdk.service.DiscoveryService" />
+
+
+<!--第三方登录 如果需要第三方登录则配置，不需要则不用配置-->
+<activity android:name="me.hekr.hekrsdk.HekrOAuthLoginActivity" />
+
+<!--第三方登录 qq 如果需要qq登录则配置，不需要则不用配置-->
+<activity
+    android:name="com.tencent.tauth.AuthActivity"
+    android:launchMode="singleTask"
+    android:noHistory="true"
+    android:screenOrientation="portrait">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <!--此处为腾讯开放平台申请的ApiId-->
+            <data android:scheme="tencent0000000000" />
+        </intent-filter>
+</activity>
+<activity
+    android:name="com.tencent.connect.common.AssistActivity"
+    android:configChanges="orientation|keyboardHidden|screenSize"
+    android:screenOrientation="portrait" />
+    
+<!--第三方登录 weibo 如果需要weibo登录则配置，不需要则不用配置-->
+ <activity
+    android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+    android:configChanges="keyboardHidden|orientation"
+    android:exported="false"
+    android:screenOrientation="portrait"
+    android:windowSoftInputMode="adjustResize" />
+<!--第三方登录 wechat 如果需要wechat登录则配置，不需要则不用配置-->
+<activity
+    android:name=".wxapi.WXEntryActivity"
+    android:exported="true"
+    android:screenOrientation="portrait">
+        <intent-filter>
+             <category android:name="android.intent.category.default" />
+        </intent-filter>
+</activity>
 ```
 ###1.2、在项目Application下进行sdk的初始化工作
 ```
@@ -115,7 +159,71 @@ hekrUserAction.login(userName, passWord, new HekrUser.LoginListener() {
         }
     });
 ```
+###2.3、第三方登录
+注意: 若要使用第三方登录，必须先在各大平台中申请第三方登录权限，申请通过后将key值填写至config.json中,根据1.1中的说明将第三方的Activity在AndroidManifest.xml中填写完整!
+示例code
+```
+ qq_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, HekrOAuthLoginActivity.class);
+                    //第二个参数为第三方类型
+                intent.putExtra(HekrOAuthLoginActivity.OAUTH_TYPE, HekrUserAction.OAUTH_QQ);
+                    //第二个参数为第三方类型
+                startActivityForResult(intent, HekrUserAction.OAUTH_QQ);
+            }
+        });
+        
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            String certificate = data.getStringExtra(HekrOAuthLoginActivity.OAUTH_CODE);
+            if (!TextUtils.isEmpty(certificate)) {
+                switch (requestCode) {
+                    case HekrUserAction.OAUTH_QQ:
+                        //移动端OAuth接口
+                        break;
+                    case HekrUserAction.OAUTH_WECHAT:
+                        //移动端OAuth接口
+                        break;
+                    case HekrUserAction.OAUTH_SINA:
+                        //移动端OAuth接口
+                        break;
+                }
+            }
+        }
+    }
+```
+|第三方类型 |说明|
+|:--|:--|
+|HekrUserAction.OAUTH_QQ|QQ| 
+|HekrUserAction.OAUTH_WECHAT|微信| 
+|HekrUserAction.OAUTH_SINA|微博| 
+注意：[3.13文档][3.13]中微博登录需要uid参数，sdk中已直接将uid参数封装至获取到certificate中，所以微博登录时可省略掉uid参数。或者直接使用SDK中的hekrUserAction.OAuthLogin();
+```
+http://uaa.openapi.hekr.me/MOAuth?type=SINA&pid=0000000000&clientType=ANDROID&certificate=certificate
+```
+SDK示例Code
+```
+//通过上一步拿到的certificate进行第三方登录
+hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA, String certificate, new HekrUser.MOAuthListener() {
+    @Override
+    public void mOAuthSuccess(MOAuthBean moAuthBean) {
+        //该OAuth账号还未和主账号绑定
+        }
 
+    @Override
+    public void mOAuthSuccess(JWTBean jwtBean) {
+         //该OAuth账号已经和主账号绑定
+        }
+
+    @Override
+   public void mOAuthFail(int errorCode) {
+        //失败
+        }
+    });
+```
 ## 三、设备配网
 配网步骤说明：1、发现设备 2、调用云端绑定接口进行绑定
 
@@ -334,7 +442,9 @@ String errorMsg = HekrCodeUtil.errorCode2Msg(errorCode);
 [0]:http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [2]:https://services.gradle.org/distributions
 [3]:https://github.com/HEKR-Cloud/HEKR-ANDROID-SDK/tree/3.0
+[11]:https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=1417751808&token=&lang=zh_CN
 [31]:https://github.com/HEKR-Cloud/HEKR-ANDROID-SDK/blob/3.0/ConfigDemo/app/src/main/java/com/example/hekr/configdemo/ConfigActivity.java#L75-L120
+[3.13]:http://docs.hekr.me/v4/developerGuide/openapi/#313-oauth
 [42]: http://www.hekr.me/docsv4/resourceDownload/protocol/json/
 [51]:http://docs.hekr.me/v4/developerGuide/openapi/#3-api
 [52]:http://docs.hekr.me/v4/developerGuide/openapi/#4-api
