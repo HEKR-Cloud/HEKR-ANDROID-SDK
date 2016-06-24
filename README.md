@@ -7,9 +7,7 @@
 * 下载[Hekr_SDK_Android_0.2.zip][3] 并解压缩。
 
 ###2、导入SDK
-* 将下载包中的hekrSDK.aar导入到本地工程中
- 
-导入方法：
+* 将下载包中的hekrSDK.aar导入到本地工程中 导入方法：
 
 > * https://developer.android.com/studio/projects/android-library.html
 > * http://www.androidchina.net/2467.html
