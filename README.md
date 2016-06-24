@@ -4,7 +4,7 @@
 * [Android SDK/Android Stuido][1]
 
 ###1、下载SDK
-* 下载[HEKR 3.0 SDK][3] 并解压缩。
+* 下载[Hekr_SDK_Android_0.2.zip][3] 并解压缩。
 
 ###2、导入SDK
 * 将下载包中的hekrSDK.aar导入到本地工程中
