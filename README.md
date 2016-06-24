@@ -8,10 +8,11 @@
 
 ###2、导入SDK
 * 将下载包中的hekrSDK.aar导入到本地工程中
+ 
 导入方法：
-https://developer.android.com/studio/projects/android-library.html
 
-http://www.androidchina.net/2467.html
+> * https://developer.android.com/studio/projects/android-library.html
+> * http://www.androidchina.net/2467.html
 
 ##一、配置
 * 说明：本SDK中已使用以下依赖，请勿重复配置！
