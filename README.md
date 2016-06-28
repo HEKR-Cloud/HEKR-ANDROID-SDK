@@ -71,7 +71,7 @@ open_sdk_r5509.jar
 <service android:name="me.hekr.hekrsdk.service.WebSocketService" />
 <!-- 局域网发现服务-->
 <service android:name="me.hekr.hekrsdk.service.DiscoveryService" />
-<!-- 局域网控制-->
+<!-- 局域网控制服务-->
 <service android:name="me.hekr.hekrsdk.service.LANService" />
 
 
