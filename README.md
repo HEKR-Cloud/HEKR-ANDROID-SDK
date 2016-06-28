@@ -6,11 +6,25 @@
 ###1、下载SDK
 * 下载[Hekr_SDK_Android_0.2.zip][3] 并解压缩。
 
-###2、导入SDK
-* 将下载包中的hekrSDK.aar导入到本地工程中 导入方法：
+###2、快速导入SDK
 
-> * https://developer.android.com/studio/projects/android-library.html
-> * http://www.androidchina.net/2467.html
+* Please ensure that you are using the latest version by [checking here](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
+
+* Gradle:
+```
+    compile 'me.hekr.hekrsdk:hekrsdk:0.0.3'
+```
+
+* Maven:
+```
+<dependency>
+  <groupId>me.hekr.hekrsdk</groupId>
+  <artifactId>hekrsdk</artifactId>
+  <version>0.0.3</version>
+  <type>pom</type>
+</dependency>
+```
+* [Or download hekrSDK from Maven Central](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
 
 ##一、配置
 * 说明：本SDK中已使用以下依赖，请勿重复配置！
