@@ -3,10 +3,7 @@
 * [Java JDK] [0]
 * [Android SDK/Android Stuido][1]
 
-###1、下载SDK
-* 下载[Hekr_SDK_Android_0.2.zip][3] 并解压缩。
-
-###2、快速导入SDK
+###1、快速导入SDK
 
 * Please ensure that you are using the latest version by [checking here](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
 
@@ -14,7 +11,6 @@
 ```
     compile 'me.hekr.hekrsdk:hekrsdk:0.0.3'
 ```
-
 * Maven:
 ```
 <dependency>
