@@ -71,6 +71,8 @@ open_sdk_r5509.jar
 <service android:name="me.hekr.hekrsdk.service.WebSocketService" />
 <!-- 局域网发现服务-->
 <service android:name="me.hekr.hekrsdk.service.DiscoveryService" />
+<!-- 局域网控制-->
+<service android:name="me.hekr.hekrsdk.service.LANService" />
 
 
 <!--第三方登录 如果需要第三方登录则配置，不需要则不用配置-->
