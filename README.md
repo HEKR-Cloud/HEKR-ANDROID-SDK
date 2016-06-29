@@ -13,14 +13,14 @@
 
 * Gradle:
 ```
-    compile 'me.hekr.hekrsdk:hekrsdk:0.0.3'
+    compile 'me.hekr.hekrsdk:hekrsdk:0.0.4'
 ```
 * Maven:
 ```
 <dependency>
   <groupId>me.hekr.hekrsdk</groupId>
   <artifactId>hekrsdk</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -45,7 +45,7 @@ weiboSDKCore_3.1.2.jar
 open_sdk_r5509.jar
 ```
 
-* 在项目res目录下创建raw目录,将下载包中的config.json、webviewjavascriptbridge.js复制进去，config.json为项目的配置文件和第三方登录配置文件（填写各大平台申请的参数），webviewjavascriptbridge.js为控制页面桥接js。
+* 在项目res目录下创建raw目录,将下载包中的config.json复制进去，config.json为项目的配置文件和第三方登录配置文件（填写各大平台申请的参数）。
 * 如果需要第三方微信登录,则必须将下载包中的wxapi文件夹复制项目包名目录（微信开放平台填写的包名）下！【具体参考[微信开放平台文档][11]】
  
 ###1.1、设置AndroidManifest.xml声明使用权限和服务
@@ -288,7 +288,7 @@ hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBea
 |object|Object|web控制页对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this|
 |devTid|String|设备tid|
 |protocol|JSONObject|指令协议 [参考协议][42] 该协议中包含的msgID和appTid字段将由SDK自动补全|
-|dataReceiverListener|HekrData.dataReceiverListener|命令发送回调|
+|dataReceiverListener|DataReceiverListener|命令发送回调|
 
 #### 回调返回值
 ```
@@ -322,7 +322,7 @@ String command={
     }
   }
 }
-MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new HekrData.dataReceiverListener() {
+MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new DataReceiverListener() {
         @Override
         public void onReceiveSuccess(String msg) {
             //接收返回命令                        
@@ -340,7 +340,7 @@ MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new HekrDat
 |:--|:--|:--|
 |object|Object|web控制页面对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this,额外说明：标识对象 当该对象释放后将不再接收消息|
 |filter|JSONObject|过滤条件 如果某个key的值为NULL表示只检查该key是否存在|
-|dataReceiverListener|HekrData.dataReceiverListener|命令接收回调接口|
+|dataReceiverListener|DataReceiverListener|命令接收回调接口|
 
 #### 回调函数
 ```
@@ -363,7 +363,7 @@ String filter={
     }
 }
 
-MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new HekrData.dataReceiverListener() {
+MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiverListener() {
         @Override
         public void onReceiveSuccess(String msg) {
             //设备主动上报命令                                
