@@ -46,6 +46,7 @@ open_sdk_r5509.jar
 ```
 
 * 在项目res目录下创建raw目录,将下载包中的config.json复制进去，config.json为项目的配置文件和第三方登录配置文件（填写各大平台申请的参数）。
+* config.json文件配置说明：文件格式不可变，pid为在[氦氪console平台](http://console.hekr.me) 注册开发者后在个人中心->认证信息中相应的企业pid,配置文件中其他第三方登录数据在各大第三方平台申请填写，如不需要使用某些第三方登录则在相应位置留空即可。
 * 如果需要第三方微信登录,则必须将下载包中的wxapi文件夹复制项目包名目录（微信开放平台填写的包名）下！【具体参考[微信开放平台文档][11]】
  
 ###1.1、设置AndroidManifest.xml声明使用权限和服务
@@ -121,6 +122,8 @@ open_sdk_r5509.jar
 ###1.2、在项目Application下进行sdk的初始化工作
 ```
 HekrSDK.init(getApplicationContext(), R.raw.config);
+//打开log,默认为false
+HekrSDK.openLog(true);
 ```
 
 ## 二、用户接口
@@ -289,6 +292,7 @@ hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBea
 |devTid|String|设备tid|
 |protocol|JSONObject|指令协议 [参考协议][42] 该协议中包含的msgID和appTid字段将由SDK自动补全|
 |dataReceiverListener|DataReceiverListener|命令发送回调|
+|isAutoPassageway|boolean|isAutoPassageway为false 只使用云端通道发送控制命令，isAutoPassageway为true 当前局域网内有设备时优先使用局域网通道发送控制命令(3秒未回复使用云端通道发送)局域网无设备直接使用云端通道发送控制命令|
 
 #### 回调返回值
 ```
@@ -332,7 +336,7 @@ MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new DataRec
         public void onReceiveTimeout() {
             //命令接收超时                       
         }
-    });
+    },false);
 ```
 ###4.2、主动接收设备上报控制命令
 #### 请求参数
