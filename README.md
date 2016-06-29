@@ -3,7 +3,11 @@
 * [Java JDK] [0]
 * [Android SDK/Android Stuido][1]
 
-###1、快速导入SDK
+###1、下载SDK配置文件
+
+* [SDK_CONFIG_FILES](Hekr_SDK_Config_Android.zip)
+
+###2、快速导入SDK
 
 * Please ensure that you are using the latest version by [checking here](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
 
