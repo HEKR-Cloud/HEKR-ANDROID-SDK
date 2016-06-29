@@ -9,7 +9,7 @@
 
 ###2、快速导入SDK
 
-* Please ensure that you are using the latest version by [checking here](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
+* Please ensure that you are using the latest version by [ ![Download](https://api.bintray.com/packages/smartmatrix2014/maven/hekrSDK/images/download.svg) ](https://bintray.com/smartmatrix2014/maven/hekrSDK/_latestVersion)
 
 * Gradle:
 ```
