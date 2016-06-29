@@ -5,7 +5,7 @@
 
 ###1、下载SDK配置文件
 
-* [SDK_CONFIG_FILES](Hekr_SDK_Config_Android.zip)
+* [SDK_CONFIG_FILES](https://raw.githubusercontent.com/HEKR-Cloud/HEKR-ANDROID-SDK/3.0/Hekr_SDK_Config_Android.zip)
 
 ###2、快速导入SDK
 
