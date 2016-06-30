@@ -13,14 +13,14 @@
 
 * Gradle:
 ```
-    compile 'me.hekr.hekrsdk:hekrsdk:0.0.5'
+    compile 'me.hekr.hekrsdk:hekrsdk:0.1.0'
 ```
 * Maven:
 ```
 <dependency>
   <groupId>me.hekr.hekrsdk</groupId>
   <artifactId>hekrsdk</artifactId>
-  <version>0.0.5</version>
+  <version>0.1.0</version>
   <type>pom</type>
 </dependency>
 ```
