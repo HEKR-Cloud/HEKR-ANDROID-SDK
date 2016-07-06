@@ -1,5 +1,5 @@
 # HEKR 3.0 SDK Android开发指南
-> * 使用SDK开发之前请务必通读本文档,
+> * 使用SDK开发之前请务必通读本文档
 > * Hekr SDK [Demo地址](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
 
 ## 集成准备
