@@ -1,4 +1,7 @@
 # HEKR 3.0 SDK Android开发指南
+> * 使用SDK开发之前请务必通读本文档,
+> * Hekr SDK [Demo地址](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
+
 ## 集成准备
 * [Java JDK] [0]
 * [Android SDK/Android Stuido][1]
@@ -32,7 +35,7 @@
 android-async-http-1.4.9.jar
 annotations-java5-15.0.jar
 eventbus-3.0.0.jar
-fastjson-1.1.51.android.jar
+fastjson-1.1.52.android.jar
 httpclient-4.4.1.2.jar
 jmdns-3.2.2.jar
 lite-common-1.1.3.jar
