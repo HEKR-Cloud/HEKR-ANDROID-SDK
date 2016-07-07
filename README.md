@@ -467,7 +467,7 @@ String errorMsg = HekrCodeUtil.errorCode2Msg(errorCode);
 [2]:https://services.gradle.org/distributions
 [3]:https://github.com/HEKR-Cloud/HEKR-ANDROID-SDK/tree/3.0
 [11]:https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=1417751808&token=&lang=zh_CN
-[31]:https://github.com/HEKR-Cloud/HEKR-ANDROID-SDK/blob/3.0/ConfigDemo/app/src/main/java/com/example/hekr/configdemo/ConfigActivity.java#L75-L120
+[31]:https://coding.net/u/jin123d/p/HekrSDKDemo/git/blob/master/app/src/main/java/me/hekr/demo/ConfigActivity.java
 [3.13]:http://docs.hekr.me/v4/developerGuide/openapi/#313-oauth
 [42]: http://www.hekr.me/docsv4/resourceDownload/protocol/json/
 [51]:http://docs.hekr.me/v4/developerGuide/openapi/#3-api
