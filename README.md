@@ -383,6 +383,57 @@ MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiv
         }
     });
 ```
+
+###4.3、云端返回所有协议信息
+
+作用：接收云端所有协议信息(例如appResp、devSend、appLoginResp等等动作信息)，便于后续自行开发处理。
+
+#### 示例code
+```
+    import android.content.BroadcastReceiver;
+    import android.content.Intent;
+    import android.content.IntentFilter;
+
+    public class DeviceCtrlActivity extends Activity{
+
+        private MsgBroadReceiver msgBroadReceiver;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_xxx);
+            createBroadcast();
+        }
+
+        /**
+        * 创建广播接收器，用来接收SDK中发出的云端协议信息
+        */
+        private void createBroadcast() {
+            msgBroadReceiver = new MsgBroadReceiver();
+            IntentFilter filter = new IntentFilter();
+            //只有持有相同的action的接受者才能接收此广播
+            filter.addAction(ConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
+            registerReceiver(msgBroadReceiver, filter);
+        }
+        class MsgBroadReceiver extends BroadcastReceiver {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //云端返回所有信息
+                String backData=intent.getStringExtra(ConstantsUtil.HEKR_WS_PAYLOAD);
+                Log.i("broadReceiver", backData);
+            }
+        }
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            if (msgBroadReceiver != null) {
+                unregisterReceiver(msgBroadReceiver);
+            }
+        }
+    }
+
+```
+
 ## 五、云端接口 
 ###5.1 openAPI中 [认证授权API][51]和[用户API][52]中的接口访问包括http get、post、delete、put、patch操作，请直接使用hekrUserAction操作，hekrUserAction可自动管理token，此类中封装了大量的常见接口。
 获取设备列表 示例code
