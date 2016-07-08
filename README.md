@@ -1,6 +1,7 @@
 # HEKR 3.0 SDK Android开发指南
 > * 使用SDK开发之前请务必通读本文档
 > * Hekr SDK [Demo地址](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
+> * Hekr SDK [docs](http://jin123d.coding.me/HekrSDKDemo)
 
 ## 集成准备
 * [Java JDK] [0]
@@ -16,14 +17,14 @@
 
 * Gradle:
 ```
-    compile 'me.hekr.hekrsdk:hekrsdk:0.1.0'
+    compile 'me.hekr.hekrsdk:hekrsdk:0.1.1'
 ```
 * Maven:
 ```
 <dependency>
   <groupId>me.hekr.hekrsdk</groupId>
   <artifactId>hekrsdk</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -411,11 +412,11 @@ hekrUserAction.getDevices(new HekrUser.GetDevicesListener() {
 |errorCode|错误码|
 ###5.2 其他未封装的接口操作请直接使用
 ```
-getHekrData()
-postHekrData()
-putHekrData()
-deleteHekrData()
-patchHekrData()
+hekrUserAction.getHekrData()
+hekrUserAction.postHekrData()
+hekrUserAction.putHekrData()
+hekrUserAction.deleteHekrData()
+hekrUserAction.patchHekrData()
 //上传文件 uri为文件路径
 uploadFile(String uri)
 ```
