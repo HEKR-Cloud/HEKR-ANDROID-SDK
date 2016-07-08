@@ -7,11 +7,11 @@
 * [Java JDK] [0]
 * [Android SDK/Android Stuido][1]
 
-###1、下载SDK配置文件
+### 1、下载SDK配置文件
 
 * [SDK_CONFIG_FILES](https://raw.githubusercontent.com/HEKR-Cloud/HEKR-ANDROID-SDK/3.0/Hekr_SDK_Config_Android.zip)
 
-###2、快速导入SDK
+### 2、快速导入SDK
 
 * Please ensure that you are using the latest version by [ ![Download](https://api.bintray.com/packages/smartmatrix2014/maven/hekrSDK/images/download.svg) ](https://bintray.com/smartmatrix2014/maven/hekrSDK/_latestVersion)
 
@@ -28,9 +28,9 @@
   <type>pom</type>
 </dependency>
 ```
-* [Or download hekrSDK from Maven Central](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
+* [Or download hekrSDK aar](https://jcenter.bintray.com/me/hekr/hekrsdk/hekrsdk/)
 
-##一、配置
+## 一、配置
 * 说明：本SDK中已使用以下依赖，请勿重复配置！
 ```
 android-async-http-1.4.9.jar
@@ -53,7 +53,7 @@ open_sdk_r5509.jar
 * config.json文件配置说明：文件格式不可变，pid为在[氦氪console平台](http://console.hekr.me) 注册开发者后在个人中心->认证信息中相应的企业pid,配置文件中其他第三方登录数据在各大第三方平台申请填写，如不需要使用某些第三方登录则在相应位置留空即可。
 * 如果需要第三方微信登录,则必须将下载包中的wxapi文件夹复制项目包名目录（微信开放平台填写的包名）下！【具体参考[微信开放平台文档][11]】
  
-###1.1、设置AndroidManifest.xml声明使用权限和服务
+### 1.1、设置AndroidManifest.xml声明使用权限和服务
 ```
 <!-- 这个权限用于进行网络定位-->
 <uses-permission android:name="android.permission.INTERNET" />
@@ -123,7 +123,7 @@ open_sdk_r5509.jar
         </intent-filter>
 </activity>
 ```
-###1.2、在项目Application下进行sdk的初始化工作
+### 1.2、在项目Application下进行sdk的初始化工作
 ```
 HekrSDK.init(getApplicationContext(), R.raw.config);
 //打开log,默认为false
@@ -132,7 +132,7 @@ HekrSDK.openLog(true);
 
 ## 二、用户接口
 
-###2.1、当前用户token
+### 2.1、当前用户token
 #### 示例code
 ```
 import me.hekr.hummingbird.action.HekrUser;
@@ -147,7 +147,7 @@ hekrUserAction.getJWT_TOKEN();
 hekrUserAction.getUserId();
 
 ```
-###2.2、用户登录
+### 2.2、用户登录
 #### 请求参数
 |key |类型及范围 |说明|
 |:--|:--|:--|
@@ -183,7 +183,7 @@ hekrUserAction.login(userName, passWord, new HekrUser.LoginListener() {
         }
     });
 ```
-###2.3、第三方登录
+### 2.3、第三方登录
 注意: 若要使用第三方登录，必须先在各大平台中申请第三方登录权限，申请通过后将key值填写至config.json中,根据1.1中的说明将第三方的Activity在AndroidManifest.xml中填写完整!
 示例code
 ```
@@ -251,8 +251,8 @@ hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA, String certificate, new Hek
 ## 三、设备配网
 配网步骤说明：1、发现设备 2、调用云端绑定接口进行绑定
 
-###3.1、发现设备：[发现设备示例代码][31]
-###3.2、绑定云端接口
+### 3.1、发现设备：[发现设备示例代码][31]
+### 3.2、绑定云端接口
 ##### 示例code
 ```
 import me.hekr.hummingbird.bean.FindDeviceBean;
@@ -288,7 +288,7 @@ hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBea
 ## 四、设备控制
 控制先决条件：用户登录成功
 
-###4.1、发送控制命令
+### 4.1、发送控制命令
 #### 请求参数
 |key |类型及范围 |说明|
 |:--|:--|:--|
@@ -342,7 +342,7 @@ MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new DataRec
         }
     },false);
 ```
-###4.2、主动接收设备上报控制命令
+### 4.2、主动接收设备上报控制命令
 #### 请求参数
 |key |类型及范围 |说明|
 |:--|:--|:--|
@@ -384,7 +384,7 @@ MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiv
     });
 ```
 
-###4.3、云端返回所有协议信息
+### 4.3、云端返回所有协议信息
 
 作用：接收云端所有协议信息(例如appResp、devSend、appLoginResp等等动作信息)，便于后续自行开发处理。
 
@@ -435,7 +435,7 @@ MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiv
 ```
 
 ## 五、云端接口 
-###5.1 openAPI中 [认证授权API][51]和[用户API][52]中的接口访问包括http get、post、delete、put、patch操作，请直接使用hekrUserAction操作，hekrUserAction可自动管理token，此类中封装了大量的常见接口。
+### 5.1 openAPI中 [认证授权API][51]和[用户API][52]中的接口访问包括http get、post、delete、put、patch操作，请直接使用hekrUserAction操作，hekrUserAction可自动管理token，此类中封装了大量的常见接口。
 获取设备列表 示例code
 ```
 import me.hekr.hummingbird.action.HekrUser;
@@ -461,7 +461,7 @@ hekrUserAction.getDevices(new HekrUser.GetDevicesListener() {
 |:--|:--|
 |devicesLists|设备列表|
 |errorCode|错误码|
-###5.2 其他未封装的接口操作请直接使用
+### 5.2 其他未封装的接口操作请直接使用
 ```
 hekrUserAction.getHekrData()
 hekrUserAction.postHekrData()
@@ -469,10 +469,15 @@ hekrUserAction.putHekrData()
 hekrUserAction.deleteHekrData()
 hekrUserAction.patchHekrData()
 //上传文件 uri为文件路径
-uploadFile(String uri)
+hekrUserAction.uploadFile(String uri)
 ```
 示例code (get/post,其他方法类似)
 ```
+ private HekrUserAction hekrUserAction;
+  
+ hekrUserAction = HekrUserAction.getInstance(context);
+
+ //get
  hekrUserAction.getHekrData(url, new HekrUserAction.GetHekrDataListener() {
         @Override
         public void getSuccess(Object object) {
@@ -485,7 +490,9 @@ uploadFile(String uri)
             String errorMsg = HekrCodeUtil.errorCode2Msg(errorCode);
         }
     });
-hekrUserAction.postHekrData(url, entity, new HekrUserAction.GetHekrDataListener() {
+
+ //post entity
+ hekrUserAction.postHekrData(url, entity, new HekrUserAction.GetHekrDataListener() {
         @Override
         public void getSuccess(Object object) {
             //post成功
