@@ -2,6 +2,7 @@
 > * 使用SDK开发之前请务必通读本文档
 > * Hekr SDK [Demo地址](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
 > * Hekr SDK [docs](http://jin123d.coding.me/HekrSDKDemo)
+> * 氦氪云 OPEN API [调试页面](http://user.openapi.hekr.me/swagger-ui.html#!/)  
 
 ## 集成准备
 * [Java JDK] [0]
@@ -231,7 +232,7 @@ http://uaa.openapi.hekr.me/MOAuth?type=SINA&pid=0000000000&clientType=ANDROID&ce
 SDK示例Code
 ```
 //通过上一步拿到的certificate进行第三方登录
-hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA, String certificate, new HekrUser.MOAuthListener() {
+hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA,certificate, new HekrUser.MOAuthListener() {
     @Override
     public void mOAuthSuccess(MOAuthBean moAuthBean) {
         //该OAuth账号还未和主账号绑定
