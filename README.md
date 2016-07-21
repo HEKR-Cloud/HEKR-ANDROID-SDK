@@ -1,8 +1,8 @@
 # HEKR 3.0 SDK Android开发指南
 > * 使用SDK开发之前请务必通读本文档
-> * Hekr SDK [Demo地址](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
-> * Hekr SDK [docs](http://jin123d.coding.me/HekrSDKDemo)
-> * 氦氪云 OPEN API [调试页面](http://user.openapi.hekr.me/swagger-ui.html#!/)  
+> * [Hekr SDK Demo](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
+> * [Hekr SDK Docs](http://jin123d.coding.me/HekrSDKDemo)
+> * [氦氪云 OPEN API 调试页面](http://user.openapi.hekr.me/swagger-ui.html#!/)  
 
 ## 集成准备
 * [Java JDK] [0]
