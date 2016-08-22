@@ -369,6 +369,7 @@ smartConfig.stopConfig();
 
 ### 4.1、发送控制命令
 **请求参数**
+
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |object|Object|web控制页对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this|
