@@ -1,6 +1,6 @@
 # HEKR 3.0 SDK Android开发指南
 > * 使用SDK开发之前请务必通读本文档
-> * [Hekr SDK Demo](https://coding.net/u/jin123d/p/HekrSDKDemo/git)
+> * [Hekr SDK Demo](http://gitlab.hekr.me/jin123d/HekrSDKDemo)
 > * [Hekr SDK Docs](http://jin123d.coding.me/HekrSDKDemo)
 > * [氦氪云 OPEN API 调试页面](http://user.openapi.hekr.me/swagger-ui.html#!/)  
 
@@ -18,14 +18,14 @@
 
 * Gradle:
 ```
-    compile 'me.hekr.hekrsdk:hekrsdk:0.3.0'
+    compile 'me.hekr.hekrsdk:hekrsdk:1.0.0'
 ```
 * Maven:
 ```
 <dependency>
   <groupId>me.hekr.hekrsdk</groupId>
   <artifactId>hekrsdk</artifactId>
-  <version>0.3.0</version>
+  <version>1.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -56,37 +56,6 @@ open_sdk_r5509.jar
  
 ### 1.1、设置AndroidManifest.xml声明使用权限和服务
 ```
-<!-- 这个权限用于进行网络定位-->
-<uses-permission android:name="android.permission.INTERNET" />
-<!-- 这个权限用于进行获取网络状态-->
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<!-- 这个权限用于进行wifi组播-->
-<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-<!-- 这些权限用于进行二维码扫描-->
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.FLASHLIGHT" />
-<uses-feature android:name="android.hardware.camera" />
-<uses-feature android:name="android.hardware.camera.autofocus" />
-<!-- 这个权限用于进行配网时阻止屏幕休眠-->
-<uses-permission android:name="android.permission.WAKE_LOCK" />
-<!-- 这个权限用于获取wifi的获取权限-->
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<!-- 用于读取手机当前的状态-->
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<!-- 写入扩展存储，向扩展卡写入数据，用于写入用户数据-->
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
-<!-- web控制服务-->
-<service android:name="me.hekr.hekrsdk.service.WebSocketService" />
-<!-- 局域网发现服务-->
-<service android:name="me.hekr.hekrsdk.service.DiscoveryService" />
-<!-- 局域网控制服务-->
-<service android:name="me.hekr.hekrsdk.service.LANService" />
-
-
-<!--第三方登录 如果需要第三方登录则配置，不需要则不用配置-->
-<activity android:name="me.hekr.hekrsdk.HekrOAuthLoginActivity" />
 
 <!--第三方登录 qq 如果需要qq登录则配置，不需要则不用配置-->
 <activity
@@ -132,29 +101,41 @@ HekrSDK.openLog(true);
 ```
 
 ## 二、用户接口
+氦氪用户接口包括了用户的注册、登录等部分。开发者需要先通过1.1和1.2正确初始化SDK后进行操作。
 
-### 2.1、当前用户token
-#### 示例code
+
+### 2.1、用户注册
+
+用户注册分为手机号码注册和邮箱注册。
+
+**手机号注册 流程示例code**
 ```
-import me.hekr.hummingbird.action.HekrUser;
-import me.hekr.hummingbird.action.HekrUserAction;
-
-private HekrUserAction hekrUserAction;
-  
-hekrUserAction = HekrUserAction.getInstance(context);
-//用户token
-hekrUserAction.getJWT_TOKEN();
-//用户唯一ID
-hekrUserAction.getUserId();
-
+//1.获取图形验证码
+hekrUserAction.getImgCaptcha()
+//2.校验图形验证码
+hekrUserAction.checkCaptcha()
+//3.发送短信验证码
+hekrUserAction.getVerifyCode()
+//4.校验短信验证码
+hekrUserAction.checkVerifyCode()
+//5.使用手机号注册
+hekrUserAction.registerByPhone()
+```
+**邮箱注册 示例code**
+```
+//使用邮箱注册
+hekrUserAction.registerByEmail()
 ```
 ### 2.2、用户登录
-#### 请求参数
+```
+hekrUserAction.login(String userName,String passWord,HekrUser.LoginListener loginListener);
+```
+**参数** 
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |userName|String|用户名|
 |passWord|String|用户密码|
-#### 返回结果
+**返回结果**
 ```
 {
     "access_token": "xxx",
@@ -164,7 +145,7 @@ hekrUserAction.getUserId();
     "jti": "7ee5ade2-3d6b-4581-93b6-fea526337742"
 }
 ```
-#### 示例code
+**示例code**
 ```
 import me.hekr.hummingbird.action.HekrUser;
 import me.hekr.hummingbird.action.HekrUserAction;
@@ -186,7 +167,8 @@ hekrUserAction.login(userName, passWord, new HekrUser.LoginListener() {
 ```
 ### 2.3、第三方登录
 注意: 若要使用第三方登录，必须先在各大平台中申请第三方登录权限，申请通过后将key值填写至config.json中,根据1.1中的说明将第三方的Activity在AndroidManifest.xml中填写完整!
-示例code
+
+**示例code**
 ```
  qq_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,13 +189,13 @@ hekrUserAction.login(userName, passWord, new HekrUser.LoginListener() {
             if (!TextUtils.isEmpty(certificate)) {
                 switch (requestCode) {
                     case HekrUserAction.OAUTH_QQ:
-                        //移动端OAuth接口
+                        //之后可通过 氦氪openapi文档中3.13 或者 3.17 进行操作
                         break;
                     case HekrUserAction.OAUTH_WECHAT:
-                        //移动端OAuth接口
+                        //之后可通过 氦氪openapi文档中3.13 或者 3.17 进行操作
                         break;
                     case HekrUserAction.OAUTH_SINA:
-                        //移动端OAuth接口
+                        //之后可通过 氦氪openapi文档中3.13 或者 3.17 进行操作
                         break;
                 }
             }
@@ -229,7 +211,8 @@ hekrUserAction.login(userName, passWord, new HekrUser.LoginListener() {
 ```
 http://uaa.openapi.hekr.me/MOAuth?type=SINA&pid=0000000000&clientType=ANDROID&certificate=certificate
 ```
-SDK示例Code
+
+**SDK示例Code**
 ```
 //通过上一步拿到的certificate进行第三方登录
 hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA,certificate, new HekrUser.MOAuthListener() {
@@ -249,48 +232,141 @@ hekrUserAction.OAuthLogin(HekrUserAction.OAUTH_SINA,certificate, new HekrUser.MO
         }
     });
 ```
-## 三、设备配网
-配网步骤说明：1、发现设备 2、调用云端绑定接口进行绑定
-
-### 3.1、发现设备：[发现设备示例代码][31]
-### 3.2、绑定云端接口
-##### 示例code
+### 2.4、当前用户token
+**示例code（调用此接口前用户必须登录成功）**
 ```
-import me.hekr.hummingbird.bean.FindDeviceBean;
-import me.hekr.hummingbird.action.HekrUserAction;
-import me.hekr.hummingbird.bean.DeviceBean;
-import me.hekr.hummingbird.bean.DeviceStatusBean;
+//用户token
+hekrUserAction.getJWT_TOKEN();
+//用户唯一ID
+hekrUserAction.getUserId();
+```
 
-private HekrUserAction hekrUserAction;
+## 三、设备配网
+配网说明：仅适用于氦氪固件4.1.11.1及以上版本
 
-hekrUserAction = HekrUserAction.getInstance(this);
+### 3.1、开始配网
 
-//在第一步发现设备callBackDevice回调函数中调用以下示例代码进行设备绑定
-hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBean.getBindKey(), new HekrUser.GetBindStatusAndBindListener() {
-        @Override
-        public void getStatusSuccess(List<DeviceStatusBean> deviceStatusBeanLists) {
-            //获取局域网内设备状态成功                
-        }
-        @Override
-        public void getStatusFail(int errorCode) {
-            //获取局域网内设备状态失败                    
-        }
-        @Override
-        public void bindDeviceSuccess(DeviceBean deviceBean) {
-            //绑定局域网内设备成功                     
-        }
-        @Override
-        public void bindDeviceFail(int errorCode) {
-            //绑定局域网内设备失败                    
-        }
-    });
+操作说明：请让模块处于配网模式
+```
+/**
+* @param ssid wifi名称
+* @param password wifi密码
+* @param number 单次配网总时间
+*/
+smartConfig.startConfig(ssid, pwd, number);
+
+```
+
+### 3.2、配网时间内接收新设备信息
+
+```
+//接收配网设备信息
+smartConfig.setNewDeviceListener(new SmartConfig.NewDeviceListener() {
+
+            //单次配网时间内查询到的所有新设备(回调每次查询到的新设备)
+            @Override
+            public void getDeviceList(List<NewDeviceBean> newDeviceList) {
+
+            }
+
+            //单次配网时间内查询到的新设备(一旦有新的设备就会触发该回调接口)
+            //只有newDeviceBean中属性bindResultCode值为0才算真正将该设备绑定到了自己账号下
+            @Override
+            public void getNewDevice(NewDeviceBean newDeviceBean) {
+                
+            }
+
+            //单次配网时间内查到新设备
+            @Override
+            public void getDeviceSuccess() {
+
+            }
+
+            //单次配网时间内未查询到任何新设备
+            @Override
+            public void getDeviceFail() {
+
+            }
+        });
+
+```
+### 3.3、主动停止配网
+注：(如不主动停止,将会在开始配网设置的时间内结束配网)
+```
+smartConfig.stopConfig();
+```
+
+### 3.4、补充说明
+
+配网模式：    wifi模块在间隔2秒闪烁表示进入配网模式
+
+新设备定义：  App配网过程中，模块处于以下情况App查询到的设备
+
+             1、模块处于配网模式，成功绑定自己本次配网所用账号的设备，判定依据NewDeviceBean 属性bindResultCode值为0
+
+             2、模块处于配网模式，但已被别人绑定的设备，判定依据NewDeviceBean 属性bindResultCode值为1 属性bindResultMsg值为E001：xxx，xxx即为真正绑定者的账号信息
+
+             3、模块处于配网模式，但模块为非自行厂家模块，判定依据NewDeviceBean 属性bindResultCode值为1 属性bindResultMsg值为E003
+
+             4、模块处于配网模式，已被自己账号绑定上并未删除解绑的设备，判定依据NewDeviceBean 属性bindResultCode值为1 属性bindResultMsg值为E004
+
+**示例code**
+
+[示例配网地址][34]
+
+```
+import me.hekr.hekrsdk.bean.NewDeviceBean;
+import me.hekr.hekrsdk.util.SmartConfig;
+
+Activity可以替换为自己的Activity
+smartConfig = new SmartConfig(Activity.this);
+
+/**
+* 开始配网
+* @param ssid wifi名称
+* @param password wifi密码
+* @param number 单次配网总时间
+*/
+smartConfig.startConfig(ssid, pwd, number);
+
+//接收配网设备信息
+smartConfig.setNewDeviceListener(new SmartConfig.NewDeviceListener() {
+
+            //单次配网时间内，查询到的所有新设备(回调每次查询到的新设备列表)
+            @Override
+            public void getDeviceList(List<NewDeviceBean> newDeviceList) {
+
+            }
+
+            //单次配网时间内，查询到的新设备(一旦有新的设备就会触发该回调接口)
+            //只有newDeviceBean中属性bindResultCode值为0才算真正将该设备绑定到了自己账号下
+            @Override
+            public void getNewDevice(NewDeviceBean newDeviceBean) {
+                
+            }
+
+            //单次配网时间内，查到新设备
+            @Override
+            public void getDeviceSuccess() {
+
+            }
+
+            //单次配网时间内，未查询到新设备
+            @Override
+            public void getDeviceFail() {
+
+            }
+        });
+
+//主动停止配网
+smartConfig.stopConfig();
 ```
 
 ## 四、设备控制
 控制先决条件：用户登录成功
 
 ### 4.1、发送控制命令
-#### 请求参数
+**请求参数**
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |object|Object|web控制页对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this|
@@ -299,7 +375,7 @@ hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBea
 |dataReceiverListener|DataReceiverListener|命令发送回调|
 |isAutoPassageway|boolean|isAutoPassageway为false 只使用云端通道发送控制命令，isAutoPassageway为true 当前局域网内有设备时优先使用局域网通道发送控制命令(3秒未回复使用云端通道发送)局域网无设备直接使用云端通道发送控制命令|
 
-#### 回调返回值
+**回调返回值**
 ```
 {
   "msgId" : 291,
@@ -316,7 +392,7 @@ hekrUserAction.deviceBindStatusAndBind(findDeviceBean.getDevTid(), findDeviceBea
   }
 }
 ```
-#### 示例code
+**示例code**
 ```
 import me.hekr.hummingbird.util.MsgUtil
 import me.hekr.hummingbird.action.HekrData;
@@ -344,14 +420,14 @@ MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new DataRec
     },false);
 ```
 ### 4.2、主动接收设备上报控制命令
-#### 请求参数
+**请求参数**
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |object|Object|web控制页面对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this,额外说明：标识对象 当该对象释放后将不再接收消息|
 |filter|JSONObject|过滤条件 如果某个key的值为NULL表示只检查该key是否存在|
 |dataReceiverListener|DataReceiverListener|命令接收回调接口|
 
-#### 回调函数
+**回调函数**
 ```
 void onReceiveSuccess(String msg);
 void onReceiveTimeout();
@@ -360,7 +436,7 @@ void onReceiveTimeout();
 |:--|:--|:--|
 |msg|符合条件的协议 [参考协议][42]|
 
-#### 示例code
+**示例code**
 ```
 import me.hekr.hummingbird.util.MsgUtil
 import me.hekr.hummingbird.action.HekrData;
@@ -389,7 +465,7 @@ MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiv
 
 作用：接收云端所有协议信息(例如appResp、devSend、appLoginResp等等动作信息)，便于后续自行开发处理。
 
-#### 示例code
+**示例code**
 ```
     import android.content.BroadcastReceiver;
     import android.content.Intent;
@@ -437,7 +513,7 @@ MsgUtil.receiveMsg(TemplateActivity.this, new JSONObject(filter), new DataReceiv
 
 ## 五、云端接口 
 ### 5.1 openAPI中 [认证授权API][51]和[用户API][52]中的接口访问包括http get、post、delete、put、patch操作，请直接使用hekrUserAction操作，hekrUserAction可自动管理token，此类中封装了大量的常见接口。
-获取设备列表 示例code
+**示例code**
 ```
 import me.hekr.hummingbird.action.HekrUser;
 import me.hekr.hummingbird.action.HekrUserAction;
@@ -445,24 +521,107 @@ import me.hekr.hummingbird.action.HekrUserAction;
 private HekrUserAction hekrUserAction;
   
 hekrUserAction = HekrUserAction.getInstance(context);
-
-hekrUserAction.getDevices(new HekrUser.GetDevicesListener() {
-        @Override
-        public void getDevicesSuccess(List<DeviceBean> devicesLists) {
-            //获取设备列表成功
-        }
-
-        @Override
-        public void getDevicesFail(int errorCode) {
-            //获取设备列表失败
-        }
-    });
+//3.18获取图形验证码
+hekrUserAction.getImgCaptcha()
+//3.19校验图形验证码
+hekrUserAction.checkCaptcha()
+//3.1 发送短信验证码
+hekrUserAction.getVerifyCode()
+//3.2 校验短信验证码
+hekrUserAction.checkVerifyCode()
+//3.3 使用手机号注册用户
+hekrUserAction.registerByPhone()
+//3.4 使用邮箱注册用户
+hekrUserAction.registerByEmail()
+//3.5 用户登录
+hekrUserAction.login()
+//3.6 重置密码
+hekrUserAction.resetPwd()
+//3.7 修改密码
+hekrUserAction.changePassword()
+//3.8 修改用户手机号
+hekrUserAction.changePhoneNumber()
+//3.9 发送重置密码邮件
+hekrUserAction.sendResetPwdEmail()
+//3.10 重新发送确认邮件
+hekrUserAction.reSendVerifiedEmail()
+//3.11 发送修改邮箱邮件
+hekrUserAction.sendChangeEmailStep1Email()
+//3.12 刷新Access Token
+hekrUserAction.refresh_token()
+//3.13 移动端OAuth
+hekrUserAction.OAuthLogin()
+//3.14 将OAuth账号和主账号绑定
+hekrUserAction.bindOAuth()
+//3.15 解除OAuth账号和主账号的绑定关系
+hekrUserAction.unbindOAuth()
+//3.16 移动端使用微信第三方账号登录
+hekrUserAction.weChatMOAuth()
+//3.17 创建匿名Hekr主账户并与当前登录三方账户绑定
+hekrUserAction.createUserAndBind()
+//4.1.1 绑定设备
+hekrUserAction.bindDevice()
+//4.1.2 列举设备列表
+hekrUserAction.getDevices()
+//4.1.3 删除设备
+hekrUserAction.deleteDevice()
+//4.1.4 更改设备名称/描述
+hekrUserAction.renameDevice()
+//4.1.5 获取当前局域网内所有设备绑定状态
+hekrUserAction.deviceBindStatus()
+//4.1.8 查询设备属主
+hekrUserAction.queryOwner()
+//4.2.1 添加目录
+hekrUserAction.addFolder()
+//4.2.2 列举目录
+hekrUserAction.getFolder()
+//4.2.3 修改目录名称
+hekrUserAction.renameFolder()
+//4.2.4 删除目录
+hekrUserAction.deleteFolder()
+//4.2.5 将设备挪到指定目录
+hekrUserAction.devicesPutFolder()
+//4.2.6 将设备从目录挪到根目录下
+hekrUserAction.folderToRoot()
+//4.3.2 反向授权创建 -1.授权用户创建授权二维码
+hekrUserAction.oAuthCreateCode()
+//4.3.2 反向授权创建 -2.被授权用户扫描该二维码
+hekrUserAction.registerAuth()
+//4.3.2 反向授权创建 -3.授权用户收到被授权者的请求
+hekrUserAction.getOAuthInfoRequest()
+//4.3.2 反向授权创建 -4.授权用户同意
+hekrUserAction.agreeOAuth()
+//4.3.2 反向授权创建 -5.授权用户拒绝
+hekrUserAction.refuseOAuth()
+//4.3.4 取消授权
+hekrUserAction.cancelOAuth()
+//4.3.5 列举授权信息
+hekrUserAction.getOAuthList()
+//4.5.1 获取用户档案
+hekrUserAction.getProfile()
+//4.5.2 更新用户档案
+hekrUserAction.setProfile()
+//4.5.16 上传文件
+hekrUserAction.uploadFile()
+//4.5.19 绑定推送标签接口
+hekrUserAction.pushTagBind()
+//4.7.2 列举群组
+hekrUserAction.getGroup()
+//5.1 判断设备模块固件是否需要升级
+hekrUserAction.checkFirmwareUpdate()
+//5.2 根据pid获取企业资讯
+hekrUserAction.getNewsByPid()
+//5.5 售后管理 - 针对设备反馈问题
+hekrUserAction.feedback()
+//退出登录
+hekrUserAction.userLogout()
+//获取登录用户UID
+hekrUserAction.getUserId()
+//获取缓存到本地的用户档案
+hekrUserAction.getUserCache()
 ```
-|返回参数 |说明|
-|:--|:--|
-|devicesLists|设备列表|
-|errorCode|错误码|
-### 5.2 其他未封装的接口操作请直接使用
+
+**5.2 其他未封装的接口操作请直接使用**
 ```
 hekrUserAction.getHekrData()
 hekrUserAction.postHekrData()
@@ -528,10 +687,12 @@ String errorMsg = HekrCodeUtil.errorCode2Msg(errorCode);
 [3]:https://github.com/HEKR-Cloud/HEKR-ANDROID-SDK/tree/3.0
 [11]:https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=1417751808&token=&lang=zh_CN
 [31]:https://coding.net/u/jin123d/p/HekrSDKDemo/git/blob/master/app/src/main/java/me/hekr/demo/ConfigActivity.java
-[3.13]:http://docs.hekr.me/v4/developerGuide/openapi/#313-oauth
+[3.13]:http://docs.hekr.me/v4/reference/openapi/#313-oauth
+[3.13]:http://docs.hekr.me/v4/reference/openapi/#317-hekr
+[34]:http://gitlab.hekr.me/jin123d/HekrSDKDemo/blob/master/app/src/main/java/me/hekr/demo/ConfigActivity.java
 [42]: http://www.hekr.me/docsv4/resourceDownload/protocol/json/
-[51]:http://docs.hekr.me/v4/developerGuide/openapi/#3-api
-[52]:http://docs.hekr.me/v4/developerGuide/openapi/#4-api
-[53]:http://docs.hekr.me/v4/developerGuide/openapi/#_10
-[54]:http://docs.hekr.me/v4/developerGuide/openapi/#_17
-[55]:http://docs.hekr.me/v4/developerGuide/openapi/#_20
+[51]:http://docs.hekr.me/v4/reference/openapi/#3-api
+[52]:http://docs.hekr.me/v4/reference/openapi/#4-api
+[53]:http://docs.hekr.me/v4/reference/openapi/#_10
+[54]:http://docs.hekr.me/v4/reference/openapi/#_17
+[55]:http://docs.hekr.me/v4/reference/openapi/#_20
