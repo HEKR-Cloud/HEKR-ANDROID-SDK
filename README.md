@@ -424,6 +424,7 @@ MsgUtil.sendMsg(TemplateActivity.this, tid, new JSONObject(command), new DataRec
 ```
 ### 4.2、主动接收设备上报控制命令
 **请求参数**
+
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |object|Object|web控制页面对象,若控制页为Android Native编写可直接当前activity的引用 例：MainActivity.this,额外说明：标识对象 当该对象释放后将不再接收消息|
