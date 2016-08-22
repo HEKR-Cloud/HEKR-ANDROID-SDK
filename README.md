@@ -131,10 +131,12 @@ hekrUserAction.registerByEmail()
 hekrUserAction.login(String userName,String passWord,HekrUser.LoginListener loginListener);
 ```
 **参数** 
+
 |key |类型及范围 |说明|
 |:--|:--|:--|
 |userName|String|用户名|
 |passWord|String|用户密码|
+
 **返回结果**
 ```
 {
